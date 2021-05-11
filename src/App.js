@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
-import MarkerInfoWindowGmapsObj from "./components/MarkerInfoWindowGmapsObj";
+import CustomMap from "./components/CustomMap";
 
 function App() {
   return (
-    <MarkerInfoWindowGmapsObj />
+    <CustomMap />
   );
 }
 

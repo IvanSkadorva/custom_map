@@ -8,7 +8,7 @@ import API_KEY from '../constants/api_key'
 import customPlaces from '../locations/places'
 
 
-class MarkerInfoWindowGmapsObj extends Component {
+class CustomMap extends Component {
     constructor(props) {
         super(props);
 
@@ -48,4 +48,4 @@ class MarkerInfoWindowGmapsObj extends Component {
     }
 }
 
-export default MarkerInfoWindowGmapsObj;
+export default CustomMap;
