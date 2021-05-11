@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import GoogleMap from '../components/GoogleMap';
+import {Marker} from "./Marker";
 
 import MINSK_CENTER from '../constants/minsk_center';
 import API_KEY from '../constants/api_key'
 
 import customPlaces from '../locations/places'
-import {Marker} from "./Marker";
 
 
 class MarkerInfoWindowGmapsObj extends Component {
@@ -18,9 +18,9 @@ class MarkerInfoWindowGmapsObj extends Component {
     }
 
     onChildClickCallback = (key) => {
-        const index =  this.state.places.findIndex((e) => e.id.toString() === key);
-        this.state.places[index].show = ! this.state.places[index].show;
-        this.setState({ places:  this.state.places });
+        const index = this.state.places.findIndex((e) => e.id.toString() === key);
+        this.state.places[index].show = !this.state.places[index].show;
+        this.setState({places: this.state.places});
     };
 
     render() {

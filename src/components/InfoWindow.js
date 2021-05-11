@@ -4,8 +4,8 @@ export const InfoWindow = (props) => {
     const { place } = props;
     const infoWindowStyle = {
         position: 'relative',
-        bottom: 115,
-        left: '-100px',
+        bottom: 270,
+        left: '-105px',
         width: 220,
         backgroundColor: 'white',
         boxShadow: '0 2px 7px 1px rgba(0, 0, 0, 0.3)',
@@ -38,6 +38,7 @@ export const InfoWindow = (props) => {
             <div style={{ fontSize: 14, color: 'green' }}>
                 {place.open_now ? 'Open' : 'Closed'}
             </div>
+            <img src={place.preview_url} alt={place.name} style={{ height: 130, width: '100%', borderRadius: 5, paddingTop: 10 }} />
         </div>
     );
 };
