@@ -5,51 +5,8 @@ import MINSK_CENTER from '../constants/minsk_center';
 import API_KEY from '../constants/api_key'
 
 import customPlaces from '../locations/places'
+import {Marker} from "./Marker";
 
-const getInfoWindowString = (place) => `
-    <div>
-      <div style="font-size: 16px;">
-        ${place.name}
-      </div>
-      <div style="font-size: 14px;">
-        <span style="color: grey;">
-        ${place.rating}
-        </span>
-        <span style="color: orange;">${String.fromCharCode(9733).repeat(Math.floor(place.rating))}</span><span style="color: lightgrey;">${String.fromCharCode(9733).repeat(5 - Math.floor(place.rating))}</span>
-      </div>
-      <div style="font-size: 14px; color: grey;">
-        ${'$'.repeat(place.price_level)}
-      </div>
-      <div style="font-size: 14px; color: green;">
-        ${place.open_now ? 'Open' : 'Closed'}
-      </div>
-    </div>`;
-
-const handleApiLoaded = (map, maps, places) => {
-    console.log(map, maps, places);
-    const markers = [];
-    const infoWindows = [];
-
-    places.forEach((place) => {
-        markers.push(new maps.Marker({
-            position: {
-                lat: place.location.lat,
-                lng: place.location.lng,
-            },
-            map,
-        }));
-
-        infoWindows.push(new maps.InfoWindow({
-            content: getInfoWindowString(place),
-        }));
-    });
-
-    markers.forEach((marker, i) => {
-        marker.addListener('click', () => {
-            infoWindows[i].open(map, marker);
-        });
-    });
-};
 
 class MarkerInfoWindowGmapsObj extends Component {
     constructor(props) {
@@ -60,6 +17,12 @@ class MarkerInfoWindowGmapsObj extends Component {
         };
     }
 
+    onChildClickCallback = (key) => {
+        const index =  this.state.places.findIndex((e) => e.id.toString() === key);
+        this.state.places[index].show = ! this.state.places[index].show;
+        this.setState({ places:  this.state.places });
+    };
+
     render() {
         const {places} = this.state;
 
@@ -69,8 +32,18 @@ class MarkerInfoWindowGmapsObj extends Component {
                 defaultCenter={MINSK_CENTER}
                 bootstrapURLKeys={{key: API_KEY}}
                 yesIWantToUseGoogleMapApiInternals
-                onGoogleApiLoaded={({map, maps}) => handleApiLoaded(map, maps, places)}
-            />
+                onChildClick={this.onChildClickCallback}
+            >
+                {places.map((place) => (
+                    <Marker
+                        key={place.id}
+                        lat={place.location.lat}
+                        lng={place.location.lng}
+                        show={place.show}
+                        place={place}
+                    />
+                ))}
+            </GoogleMap>
         );
     }
 }
