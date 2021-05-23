@@ -5,4 +5,4 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-![alt text](https://github.com/IvanSkadorva/custom_map/blob/main/map.png?raw=true)
+![alt text](https://github.com/IvanSkadorva/custom_map/blob/main/map.jpeg?raw=true)
